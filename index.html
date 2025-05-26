@@ -29,7 +29,7 @@
 
 <script>
   const PASSWORD = "Wachtwoord123"; // hetzelfde wachtwoord als backend
-  const API_URL = "https://jouw-backend-url-hier/api/sales"; // Vervang dit met jouw backend URL
+  const API_URL = "https://robux-v02w.onrender.com/api/sales"; // Jouw backend URL
 
   function login() {
     const pw = document.getElementById("password").value;
@@ -84,7 +84,7 @@
     } catch (e) {
       console.error(e);
     }
-    setTimeout(fetchSales, 15000); // elke 15 sec updaten
+    setTimeout(fetchSales, 15000); // update elke 15 seconden
   }
 
   // Check of al ingelogd
