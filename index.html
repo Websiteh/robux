@@ -1,97 +1,11 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dashboard</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 20px; background:#f0f0f0; }
-  #login { max-width: 300px; margin: 100px auto; }
-  #dashboard { display: none; max-width: 800px; margin: auto; }
-  .sale { background: white; padding: 10px; margin: 10px 0; border-radius: 5px; display:flex; align-items:center; gap:10px; }
-  .logo, .profile-pic { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-
-<div id="login">
-  <h2>aufloggen</h2>
-  <input id="password" type="password" placeholder="Wachtwoord" />
-  <button onclick="login()">Login</button>
-  <p id="login-error" style="color:red; display:none;">Fout wachtwoord</p>
-</div>
-
-<div id="dashboard">
-  <h1>Recente verkopen</h1>
-  <div id="sales"></div>
-  <button onclick="logout()">Uitloggen</button>
-</div>
-
-<script>
-  const PASSWORD = "Wachtwoord123"; // hetzelfde wachtwoord als backend
-  const API_URL = "https://robux-v02w.onrender.com/api/sales"; // Jouw backend URL
-
-  function login() {
-    const pw = document.getElementById("password").value;
-    if (pw === PASSWORD) {
-      localStorage.setItem("auth", pw);
-      showDashboard();
-    } else {
-      document.getElementById("login-error").style.display = "block";
-    }
-  }
-
-  function logout() {
-    localStorage.removeItem("auth");
-    document.getElementById("dashboard").style.display = "none";
-    document.getElementById("login").style.display = "block";
-  }
-
-  function showDashboard() {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
-    fetchSales();
-  }
-
-  async function fetchSales() {
-    const auth = localStorage.getItem("auth");
-    if (!auth) {
-      logout();
-      return;
-    }
-    try {
-      const res = await fetch(API_URL, { headers: { "Authorization": auth } });
-      if (res.status === 401) {
-        logout();
-        return;
-      }
-      const data = await res.json();
-      const container = document.getElementById("sales");
-      container.innerHTML = "";
-      data.sales.forEach(sale => {
-        const el = document.createElement("div");
-        el.className = "sale";
-        el.innerHTML = `
-          <img class="logo" src="${sale.group_logo}" alt="${sale.group_name} logo" />
-          <div>
-            <strong>${sale.user}</strong> kocht <strong>${sale.item}</strong><br/>
-            <small>Groep: ${sale.group_name} | +${sale.robux} ⏣ | Tijd: ${sale.time}</small>
-          </div>
-          <img class="profile-pic" src="${sale.profile_pic}" alt="Profiel foto ${sale.user}" />
-        `;
-        container.appendChild(el);
-      });
-    } catch (e) {
-      console.error(e);
-    }
-    setTimeout(fetchSales, 15000); // update elke 15 seconden
-  }
-
-  // Check of al ingelogd
-  if (localStorage.getItem("auth") === PASSWORD) {
-    showDashboard();
-  }
-</script>
-
+  hallo
 </body>
 </html>
